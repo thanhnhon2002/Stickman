@@ -1,14 +1,15 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class Stickman:MonoBehaviour
 {
     public Rigidbody2D rb;
-   // public ParticleSystem particaleDie;
+    public ParticleSystem particaleDie;
     private void Awake()
     {
         transform.tag = "Stickman";
         rb = GetComponent<Rigidbody2D>();
-       // particaleDie = Resources.Load<ParticleSystem>("ParticalSystem/Explosion1");
+        particaleDie = Resources.Load<ParticleSystem>("ParticleSystems/ExplosionDie");
     }
     private void Start()
     {
@@ -18,12 +19,17 @@ public class Stickman:MonoBehaviour
     {
         if (collision.transform.tag.Equals("DangerousArea")) this.Lose();
     }
-    protected void Lose()
+    public void Lose()
     {
         Debug.Log("You Lose");
+        AnimationLose();      
+    }
+    void AnimationLose()
+    {
+        TimeLapse.instance.isDecTime = false;
+        Instantiate(particaleDie, transform.position + new Vector3(0, -1, 0), Quaternion.identity);
+        Instantiate(particaleDie, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
         gameObject.SetActive(false);
-       // Instantiate(particaleDie,transform.position+new Vector3(0,-1,0),Quaternion.identity);
-       // Instantiate(particaleDie,transform.position+new Vector3(0,1,0),Quaternion.identity);
-        GameManager.instance.SetLevel(0);
+        LeanTween.delayedCall(2.5f,()=>GameManager.instance.SetLevel(0));
     }
 }

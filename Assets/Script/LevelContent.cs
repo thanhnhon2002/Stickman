@@ -20,5 +20,6 @@ public class LevelContent : MonoBehaviour,IPointerClickHandler
     {
         Debug.Log(level);
         GameManager.instance.GoToLevel(level);
+        Time.timeScale = 1;
     }
 }

@@ -722,7 +722,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3708653114508164446}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DangerousArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}

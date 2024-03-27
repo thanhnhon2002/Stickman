@@ -1438,6 +1438,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
+  particaleDie: {fileID: 0}
 --- !u!1 &2875864695036840729
 GameObject:
   m_ObjectHideFlags: 0
@@ -2032,7 +2033,7 @@ GameObject:
   - component: {fileID: 1987635518393793213}
   - component: {fileID: 955991884281451700}
   - component: {fileID: 802880906568334907}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DangerousArea
   m_TagString: DangerousArea
   m_Icon: {fileID: 0}

@@ -368,7 +368,7 @@ GameObject:
   - component: {fileID: 7605606071622108773}
   - component: {fileID: 6880054891043364423}
   - component: {fileID: 7868380617399055745}
-  - component: {fileID: 4872611121585010911}
+  - component: {fileID: 9016085661150903319}
   m_Layer: 0
   m_Name: Stickman
   m_TagString: Untagged
@@ -715,7 +715,7 @@ PolygonCollider2D:
       - {x: -0.3875, y: 0.21249999}
       - {x: -0.39249998, y: 0.2175}
   m_UseDelaunayMesh: 0
---- !u!114 &4872611121585010911
+--- !u!114 &9016085661150903319
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -724,10 +724,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3032192394522065746}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53870a79026104842826cb75f7751995, type: 3}
+  m_Script: {fileID: 11500000, guid: 4677980ba9270af4ea125e07e8534e09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
+  particaleDie: {fileID: 0}
 --- !u!1 &6075557483629554532
 GameObject:
   m_ObjectHideFlags: 0

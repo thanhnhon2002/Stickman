@@ -968,9 +968,9 @@ GameObject:
   m_Component:
   - component: {fileID: 265871691629231611}
   - component: {fileID: 6491597689120055316}
-  - component: {fileID: 1481572367571872179}
   - component: {fileID: 7910779315992313701}
   - component: {fileID: 485865896056378632}
+  - component: {fileID: 603773805574650741}
   m_Layer: 0
   m_Name: Stickman
   m_TagString: Stickman
@@ -1047,19 +1047,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1481572367571872179
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8932565687790003711}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53870a79026104842826cb75f7751995, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: 0}
 --- !u!50 &7910779315992313701
 Rigidbody2D:
   serializedVersion: 4
@@ -1291,6 +1278,20 @@ PolygonCollider2D:
       - {x: 0.42999998, y: -2.135}
       - {x: 0.5, y: -2.125}
   m_UseDelaunayMesh: 0
+--- !u!114 &603773805574650741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8932565687790003711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4677980ba9270af4ea125e07e8534e09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 0}
+  particaleDie: {fileID: 0}
 --- !u!1 &9026304012925713518
 GameObject:
   m_ObjectHideFlags: 0

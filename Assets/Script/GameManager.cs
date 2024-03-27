@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public ScrollRect scrollLevel;
     private void Awake()
     {
+        Application.targetFrameRate = 60;
         instance = this;
     }
     private void Start()
@@ -20,6 +21,7 @@ public class GameManager : MonoBehaviour
     }
     public void SetLevel(int unit)
     {
+        DrawLine.instance.isDraw = true;
         levelIndex+=unit;
         if(levelIndex>levelMaxIndex) levelIndex = levelMaxIndex;
         else if(levelIndex<0) levelIndex = 0;
@@ -48,7 +50,15 @@ public class GameManager : MonoBehaviour
     }
     public void SetStatusScrollLevel()
     {
-        if(scrollLevel.gameObject.activeInHierarchy) scrollLevel.gameObject.SetActive(false);
-        else scrollLevel.gameObject.SetActive(true);
+        if (scrollLevel.gameObject.activeInHierarchy)
+        {
+            scrollLevel.gameObject.SetActive(false);
+            Time.timeScale = 1;
+        }
+        else
+        {
+            scrollLevel.gameObject.SetActive(true);
+            Time.timeScale = 0;
+        }
     }
 } 

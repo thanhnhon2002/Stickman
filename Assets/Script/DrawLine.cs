@@ -14,7 +14,9 @@ public class DrawLine : MonoBehaviour
     Rigidbody2D rb;
     public float sizePolygon;
     public float spaceLine;
+    public bool isDrawing;
     public bool isDraw;
+    [SerializeField] float lengthLine;
     private void Awake()
     {
         this.lineRenderer = GetComponentInChildren<LineRenderer>();
@@ -24,7 +26,9 @@ public class DrawLine : MonoBehaviour
     }
     private void Start()
     {
-        isDraw = false;
+        lengthLine = 0;
+        isDrawing = false;
+        isDraw = true;
         this.rb.simulated = false;
     }
     void Update()
@@ -36,40 +40,53 @@ public class DrawLine : MonoBehaviour
     }
     public void ResetLine()
     {
+        lengthLine = 0;
         lineRenderer.transform.position = Vector3.zero;
         lineRenderer.transform.rotation = Quaternion.identity;
         this.rb.simulated = false;
         this.listPoint.Clear();
-        this.lineRenderer.positionCount = 1;
+        this.lineRenderer.positionCount = 0;
         this.polygonCollider2D.pathCount = 0;
     }
     void OnMouseBnDown()
     {
+        if (!isDraw) return;
         if (EventSystem.current.IsPointerOverGameObject()) return;
-        this.isDraw = true;
+        this.isDrawing = true;
         this.ResetLine();
+        this.lineRenderer.positionCount = 1;
         this.oldPos = this.mousePos;      
         this.listPoint.Add(this.mousePos);
         this.lineRenderer.SetPosition(0, this.mousePos);
     }
     void OnMouseBnDrag() 
     {
-        if(!this.isDraw) return;
+        if(!this.isDrawing) return;
+        
         if (Vector3.Distance(this.mousePos, oldPos) < this.spaceLine) return;
-        this.oldPos = this.mousePos;
+        lengthLine += Vector3.Distance(mousePos, oldPos);
+        this.oldPos = this.mousePos;      
         this.listPoint.Add(this.mousePos);
         this.lineRenderer.positionCount++;
         this.lineRenderer.SetPosition(this.lineRenderer.positionCount - 1, this.mousePos);
+
+        if (lengthLine > 10) OnMouseBnUp();
     }
     void OnMouseBnUp()
     {
-        if (!this.isDraw) return;
+        if (listPoint.Count < 3)
+        {
+            ResetLine();
+            return;
+        }
+        if (!this.isDrawing) return;
         this.DrawPolygonLine();
         rb.velocity = Vector2.zero;
         rb.angularVelocity = 0;
         this.rb.simulated = true;
-        this.isDraw = false;
+        this.isDrawing = false;
         GameManager.instance.StartLevel();
+        isDraw = false;
     } 
     void DrawPolygonLine()
     {

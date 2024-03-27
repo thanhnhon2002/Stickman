@@ -8,6 +8,7 @@ public class TimeLapse : MonoBehaviour
     [SerializeField] float currentTime;
 
     TextMeshProUGUI text;
+    public bool isDecTime=true;
     private void Awake()
     {
         this.text = GetComponent<TextMeshProUGUI>();
@@ -15,12 +16,13 @@ public class TimeLapse : MonoBehaviour
     }
     public void InitTimeText()
     {
+        isDecTime = true;
         this.currentTime = timeEndGame;
         this.text.SetText(((int)this.timeEndGame).ToString());
     }
     private void Update()
     {
-        if(currentTime <timeEndGame&&currentTime>0)
+        if(currentTime <timeEndGame&&currentTime>0&&isDecTime)
         {
             currentTime-=Time.deltaTime;
             SetTextTime();
@@ -33,6 +35,7 @@ public class TimeLapse : MonoBehaviour
     }
     public void CountDown()
     {
+        isDecTime=true;
         currentTime = timeEndGame - 0.05f;
     }
     void SetTextTime()
