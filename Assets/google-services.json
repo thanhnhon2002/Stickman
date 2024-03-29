@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "908746970737",
+    "project_id": "stickman-draw-2-save",
+    "storage_bucket": "stickman-draw-2-save.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:908746970737:android:7c1f8ea8fd656668ba2dd0",
+        "android_client_info": {
+          "package_name": "com.darkcupgames.draw2save.stickman"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChoqcUiSXfEOmB62Stco9v9FlAQU76BYI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
