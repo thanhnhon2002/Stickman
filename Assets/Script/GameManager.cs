@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -9,6 +10,7 @@ public class GameManager : MonoBehaviour
     public int levelIndex;
     public int levelMaxIndex;
     public ScrollRect scrollLevel;
+    [SerializeField]public List<float> lengthLines = new List<float>();
     private void Awake()
     {
         Application.targetFrameRate = 60;

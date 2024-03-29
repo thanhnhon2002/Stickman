@@ -1333,7 +1333,7 @@ GameObject:
   - component: {fileID: 1923343193890991737}
   - component: {fileID: 7619146986008137357}
   - component: {fileID: 1790991842581836182}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Asset 13save the stickman
   m_TagString: DangerousArea
   m_Icon: {fileID: 0}

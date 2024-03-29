@@ -17,7 +17,11 @@ public class Stickman:MonoBehaviour
     }
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.transform.tag.Equals("DangerousArea")) this.Lose();
+        if (collision.transform.tag.Equals("DangerousArea"))
+        {
+            if (collision.transform.GetComponent<AnimationBom>() != null&& collision.transform.GetComponent<AnimationBom>().isExplosionTimeLape) collision.transform.GetComponent<AnimationBom>().Explosion();
+            this.Lose();
+        }
     }
     public void Lose()
     {

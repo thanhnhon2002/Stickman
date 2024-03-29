@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class DrawLine : MonoBehaviour
 {
@@ -17,11 +18,13 @@ public class DrawLine : MonoBehaviour
     public bool isDrawing;
     public bool isDraw;
     [SerializeField] float lengthLine;
+    Slider lineBar;
     private void Awake()
     {
         this.lineRenderer = GetComponentInChildren<LineRenderer>();
         this.polygonCollider2D = GetComponentInChildren<PolygonCollider2D>();
         this.rb = GetComponentInChildren<Rigidbody2D>();
+        lineBar = FindObjectOfType<Slider>();
         instance = this; 
     }
     private void Start()
@@ -33,6 +36,7 @@ public class DrawLine : MonoBehaviour
     }
     void Update()
     {
+        lineBar.value = lengthLine / GameManager.instance.lengthLines[GameManager.instance.levelIndex];
         this.mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         if (Input.GetMouseButtonDown(0)) this.OnMouseBnDown();
         if (Input.GetMouseButton(0)) this.OnMouseBnDrag();
@@ -70,7 +74,7 @@ public class DrawLine : MonoBehaviour
         this.lineRenderer.positionCount++;
         this.lineRenderer.SetPosition(this.lineRenderer.positionCount - 1, this.mousePos);
 
-        if (lengthLine > 10) OnMouseBnUp();
+        if (lineBar.value==1) OnMouseBnUp();
     }
     void OnMouseBnUp()
     {
