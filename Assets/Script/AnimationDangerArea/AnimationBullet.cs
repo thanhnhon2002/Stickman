@@ -4,10 +4,12 @@ public class AnimationBullet : AnimationDangerObjOnRigid
 {
     public Vector2 direction;
     public float force;
+    public Stickman stickman;
+
     private void Update()
     {
-        Stickman stickman = GameManager.instance.GetComponentInChildren<Stickman>();
-        if (stickman!=null&& Vector3.Distance(stickman.transform.position, transform.position) <= 1) stickman.Lose();
+        if(stickman==null) stickman = transform.parent.GetComponentInChildren<Stickman>();
+        else if (stickman.gameObject.activeInHierarchy&&Vector3.Distance(stickman.transform.position, transform.position) <= 1) stickman.Lose();
     }
     public override void OnAnimation()
     {

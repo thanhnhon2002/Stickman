@@ -1176,7 +1176,7 @@ GameObject:
   - component: {fileID: 5587337771145003170}
   - component: {fileID: 5980589353903453419}
   - component: {fileID: 686852508790959000}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Square
   m_TagString: DangerousArea
   m_Icon: {fileID: 0}

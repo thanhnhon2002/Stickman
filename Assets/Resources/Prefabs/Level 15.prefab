@@ -411,7 +411,7 @@ Transform:
   m_GameObject: {fileID: 2818496715691026193}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.76, y: 2.71, z: 0}
+  m_LocalPosition: {x: 7.76, y: 3.12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -515,6 +515,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13982f40adb08f64983fa2cff0e6f303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isExplosionTimeLape: 1
 --- !u!114 &4159580193992681267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1531,6 +1532,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7460258122098365950}
   - component: {fileID: 7140896959306443545}
+  - component: {fileID: 9165754319191152891}
+  - component: {fileID: 4091022642964512649}
   m_Layer: 0
   m_Name: Evil Guy
   m_TagString: Untagged
@@ -1620,6 +1623,46 @@ PolygonCollider2D:
       - {x: -0.31588995, y: -0.78459334}
       - {x: 0.30309486, y: -0.7120133}
   m_UseDelaunayMesh: 0
+--- !u!114 &9165754319191152891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8262478270811318129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13982f40adb08f64983fa2cff0e6f303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isExplosionTimeLape: 0
+--- !u!50 &4091022642964512649
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8262478270811318129}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &8344377190840579626
 GameObject:
   m_ObjectHideFlags: 0
