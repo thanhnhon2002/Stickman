@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using System.IO;
+using System.Collections.Generic;
 
 // Disable import of materials if the file contains
 // the @ sign marking it as an animation.
@@ -9,55 +10,37 @@ public class Example : AssetPostprocessor
     public const string END_FILE_NAME = " - POT";
     public const string EXSTENSION = ".png";
 
-    void OnPreprocessModel()
+    public static List<int> dimensions = null;
+
+    public void Init()
     {
-        if (assetPath.Contains("@"))
+        dimensions = new List<int>();
+        for (int i = 0; i < 20; i++)
         {
-            ModelImporter modelImporter = assetImporter as ModelImporter;
-            modelImporter.materialImportMode = ModelImporterMaterialImportMode.None;
+            dimensions[i] = (int)Mathf.Pow(2, i);
         }
-
-        Debug.Log($"assetImporter.assetBundleName {assetImporter.assetBundleName}");
-        Debug.Log($"assetImporter.assetBundleVariant {assetImporter.assetBundleVariant}");
-        Debug.Log($"assetImporter.assetPath {assetImporter.assetPath}");
-        Debug.Log($"assetImporter.assetTimeStamp {assetImporter.assetTimeStamp}");
-        Debug.Log($"assetImporter.name {assetImporter.name}");
-        Debug.Log("context");
-        Debug.Log(context);
-    }
-
-    static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths, bool didDomainReload)
-    {
-        //foreach (string str in importedAssets)
-        //{
-        //    Debug.Log("Reimported Asset: " + str);
-        //}
-        //foreach (string str in deletedAssets)
-        //{
-        //    Debug.Log("Deleted Asset: " + str);
-        //}
-
-        //for (int i = 0; i < movedAssets.Length; i++)
-        //{
-        //    Debug.Log("Moved Asset: " + movedAssets[i] + " from: " + movedFromAssetPaths[i]);
-        //}
-
-        //if (didDomainReload)
-        //{
-
-        //}
-        Debug.Log($"Domain has been reloaded = {didDomainReload}");
     }
 
     void OnPostprocessSprites(Texture2D texture, Sprite[] sprites)
     {
         if (texture.name.EndsWith(END_FILE_NAME)) return;
-        Debug.Log("Sprites: " + sprites.Length);
         string path = "Assets/POT/" + texture.name + END_FILE_NAME + EXSTENSION;
         for (int i = 0; i < sprites.Length; i++)
         {
-            SaveFile(sprites[i], (int)sprites[i].rect.width * 2, (int)sprites[i].rect.height * 2, path);
+            SaveFile(sprites[i], GetPOTSize((int)sprites[i].rect.width), GetPOTSize((int)sprites[i].rect.height), path);
         }
+    }
+
+    public int GetPOTSize(int number)
+    {
+        if (dimensions == null) Init();
+
+        for (int i = 0; i < dimensions.Count; i++)
+        {
+            if (number < dimensions[i]) return dimensions[i];
+        }
+        Debug.LogError($"number too big to put to POT");
+        return number;
     }
 
     public void SaveFile(Sprite sprite, int newWidth, int newHeight, string savePath)
@@ -66,19 +49,64 @@ public class Example : AssetPostprocessor
         var rect = sprite.rect;
         rect.width *= 2;
         rect.height *= 2;
+        //sprite.texture.Resize(newWidth, newHeight);
+        Texture2D resizedTexture = new Texture2D(newWidth, newHeight);
+        resizedTexture.ReadPixels(sprite.rect, 0,0);
+
         //sprite.rect = rect;
-        
+
         //Graphics.Blit(originalTexture, rt);
         //Texture2D itemBGTex = sprite.texture;
         //byte[] itemBGBytes = itemBGTex.EncodeToPNG();
         //File.WriteAllBytes(savePath, itemBGBytes);
-        Texture2D itemBGTex = sprite.texture;
-        byte[] itemBGBytes = itemBGTex.EncodeToPNG();
+
+        //GOOD - DA CHAY DUOC
+        //Texture2D itemBGTex = sprite.texture;
+        //byte[] itemBGBytes = itemBGTex.EncodeToPNG();
+        //File.WriteAllBytes(savePath, itemBGBytes);
+
+        //Sprite newSprite = Sprite.Create(sprite.texture, rect, Vector2.zero);
+        //itemBGBytes = newSprite.texture.EncodeToPNG();
+        //File.WriteAllBytes(savePath + ".png", itemBGBytes);
+        //END
+
+
+        Texture2D texture = new Texture2D(newWidth, newHeight);
+        //Sprite newSprite = Sprite.Create(texture, new Rect(0, 0, newWidth, newHeight), new Vector2(0, 0), 1);
+        for (int i = 0; i < texture.width; i++)
+        {
+            for (int j = 0; j < texture.height; j++)
+            {
+                if (i < sprite.texture.width && j < sprite.texture.height)
+                {
+                    texture.SetPixel(i, j, sprite.texture.GetPixel(i,j));
+                } else
+                {
+                    texture.SetPixel(i, j, Color.clear);
+                }
+            }
+        }
+        texture.Apply();
+        //texture.SetPixel(0, 0, Color.blue);
+        //RenderTexture render = new RenderTexture(newWidth, newHeight,1);
+        //Graphics.Blit(sprite.texture, render);
+
+        //Graphics.DrawTexture()
+
+        byte[] itemBGBytes = texture.EncodeToPNG();
         File.WriteAllBytes(savePath, itemBGBytes);
 
-        Sprite newSprite = Sprite.Create(sprite.texture, rect, Vector2.zero);
-        itemBGBytes = newSprite.texture.EncodeToPNG();
-        File.WriteAllBytes(savePath + ".png", itemBGBytes);
+        //RectTransform rt = newSprite.GetComponent<RectTransform>();
+
+        //string url = "";//image url;
+        //WWW image = new WWW(url);
+        //yield return image;
+        //Texture2D texture = new Texture2D(1, 1);
+        //image.LoadImageIntoTexture(texture);
+        //Sprite newSprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0, 0), 1);
+        //RectTransform rt = newSprite.GetComponent<RectTransform>();
+        //rt.sizeDelta = new Vector2(20, 20);//make 20px * 20px sprite
+
 
         //// Get the texture of the sprite
         //Texture2D originalTexture = sprite.texture;
@@ -114,3 +142,59 @@ public class Example : AssetPostprocessor
         Debug.Log("Texture2D: (" + texture.width + "x" + texture.height + ")");
     }
 }
+
+
+//public Texture2D stamp;
+//public Texture2D background;
+//public Texture2D output;
+
+////location to stamp
+//public int locationx = 0;
+//public int locationy = 0;
+//void Start()
+//{
+//    int x, y;
+
+//    //make a copy of your background
+//    output = new Texture2D(background.width, background.height);
+//    x = output.width; y = output.height;
+//    while (x > 0)
+//    {
+//        x--;
+//        y = output.height;
+//        while (y > 0)
+//        {
+//            y--;
+//            output.SetPixel(x, y, background.GetPixel(x, y));
+//        }
+//    }
+
+
+//    // page through all your pixels of stamp
+//    x = stamp.width; y = stamp.height;
+//    while (x > 0)
+//    {
+//        x--;
+//        y = stamp.height;
+//        while (y > 0)
+//        {
+//            y--;
+//            if (x + locationx < background.width && y + locationy < background.height)
+//            {
+//                Color cs = stamp.GetPixel(x, y);
+//                Color cb = background.GetPixel(x + locationx, y + locationy);
+//                float a = cs.a;//<---alph of the stamp pixel;
+//                               // mix colors based on alpha channel
+//                float r = (cs.r * a) + (cb.r * (1 - a));
+//                float g = (cs.g * a) + (cb.g * (1 - a));
+//                float b = (cs.b * a) + (cb.b * (1 - a));
+
+//                output.SetPixel(x + locationx, y + locationy, new Color(r, g, b, 1));
+
+//            }
+//        }
+//    }
+//    output.Apply();
+
+
+//}
