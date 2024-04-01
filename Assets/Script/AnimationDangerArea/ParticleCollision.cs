@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class ParticleCllision : MonoBehaviour
+public class ParticleCollision : MonoBehaviour
 {
     private void OnParticleCollision(GameObject other)
     {

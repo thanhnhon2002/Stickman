@@ -12,10 +12,7 @@ public class AnimationBom:AnimationDangerObjOnRigid
     public override void OnAnimation()
     {
         base.OnAnimation();
-        if(isExplosionTimeLape) LeanTween.delayedCall(3,()=>BomTimeLapse());
-        //Sequence sequence = DOTween.Sequence();
-        //sequence.AppendInterval(3);
-        //sequence.AppendCallback(() => BomTimeLapse());  
+        if(isExplosionTimeLape) LeanTween.delayedCall(3,()=>BomTimeLapse()); 
     }
     void BomTimeLapse()
     {
