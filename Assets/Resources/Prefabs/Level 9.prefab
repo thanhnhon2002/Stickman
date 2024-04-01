@@ -1378,6 +1378,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
+  particaleDie: {fileID: 0}
 --- !u!1 &6850944917112554663
 GameObject:
   m_ObjectHideFlags: 0
@@ -1886,7 +1887,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 824752746434862938, guid: d05db4e039d8ea846b817d67f2ff4188, type: 3}
       propertyPath: force
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 824752746434862938, guid: d05db4e039d8ea846b817d67f2ff4188, type: 3}
       propertyPath: direction.x
@@ -1980,7 +1981,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 824752746434862938, guid: d05db4e039d8ea846b817d67f2ff4188, type: 3}
       propertyPath: force
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 824752746434862938, guid: d05db4e039d8ea846b817d67f2ff4188, type: 3}
       propertyPath: direction.x

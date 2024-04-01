@@ -1305,7 +1305,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 824752746434862938, guid: d05db4e039d8ea846b817d67f2ff4188, type: 3}
       propertyPath: force
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 824752746434862938, guid: d05db4e039d8ea846b817d67f2ff4188, type: 3}
       propertyPath: direction.x
@@ -1326,6 +1326,10 @@ PrefabInstance:
     - target: {fileID: 5003641273522651714, guid: d05db4e039d8ea846b817d67f2ff4188, type: 3}
       propertyPath: direction.y
       value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6357991168870818474, guid: d05db4e039d8ea846b817d67f2ff4188, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6439430763699062327, guid: d05db4e039d8ea846b817d67f2ff4188, type: 3}
       propertyPath: m_LocalPosition.x
